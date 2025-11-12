@@ -28,8 +28,8 @@ outputDir   = "output/"
 nCPUS       = 128
 
 # scale the histograms with the cross-section and integrated luminosity
-doScale = False
-intLumi = 1.0 # 44.84 pb-1 = LEP, 100e6=100 ab-1 = FCCee
+doScale = True
+intLumi = 100e6 # 44.84 pb-1 = LEP, 100e6=100 ab-1 = FCCee
 
 # define histograms
 bins_p_mu = (200, 0, 200) # 1 GeV bins

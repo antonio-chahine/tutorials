@@ -86,11 +86,52 @@ def plot_cutflow():
     fig.savefig(f"{outDir}/cutFlow_mpl4hep.pdf", bbox_inches="tight")
 
 
+def muon_max_p_norm():
+    fig = plt.figure()
+    ax = fig.subplots()
+
+
+    hists = []
+    for i,proc in enumerate(procs):
+        file = uproot.open(f"output/{proc}.root")
+        #print(file.keys())
+        h = file["muon_max_p_norm"]
+        h = h.to_hist()
+        #print(h)
+        hists.append(h)
+
+
+    hep.histplot(
+        hists,
+        stack=True,
+        histtype="fill",
+        color=["#7FBF7F", "#7F7FFF", "w"],
+        edgecolor=["k", "k", "r"],
+        linewidth=1,
+        label=labels,
+        ax=ax,
+    )
+
+    ax.set_ylabel("Events")
+    ax.set_xlim([0, 1.2])
+    ax.legend(loc='upper left', fontsize='x-small')
+    ax.set_yscale("log")
+    ax.set_xlabel("")
+    ax.margins(y=0.25)
+
+    hep.label.exp_label(exp="FCC-ee", ax=ax, data=False, rlabel="44.84 $\mathrm{pb^{-1}}$ (91.2 GeV)")
+
+    fig.savefig(f"{outDir}/muon_max_p_norm_mpl4hep.png", bbox_inches="tight")
+    fig.savefig(f"{outDir}/muon_max_p_norm_mpl4hep.pdf", bbox_inches="tight")
+
+
+
 if __name__ == "__main__":
 
-    outDir = "/home/submit/jaeyserm/public_html/fccee/tutorials/z_mumu_xsec/"
+    outDir = "/work/submit/anton100/msci-project/tutorials/03_CrossSection"
     procs = ["p8_ee_gaga_mumu_ecm91p2", "wzp6_ee_tautau_ecm91p2", "wzp6_ee_mumu_ecm91p2"]
     labels = ["$e^+e^-\\to e^+e^-qq$", "$e^+e^-\\to\\tau^+\\tau^-$", "$e^+e^-\\to\mu^+\mu^-$"]
 
     plot_invariant_mass()
     plot_cutflow()
+    muon_max_p_norm()

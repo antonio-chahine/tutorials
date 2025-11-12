@@ -8,7 +8,7 @@ energy         = 91.2
 collider       = 'FCC-ee'
 formats        = ['png','pdf']
 
-outdir         = '/home/submit/jaeyserm/public_html/fccee/tutorials/z_mumu_xsec/'
+outdir         = '/work/submit/anton100/msci-project/tutorials/03_CrossSection'
 inputDir       = './output/' 
 
 plotStatUnc    = False
